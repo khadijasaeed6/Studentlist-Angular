@@ -40,9 +40,10 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  viewDetails(id: string): void {
-    this.selectedStudent = this.students.find(student => student.id === id);
+  viewDetails(student: Student) {
+    this.selectedStudent = student;
   }
+
 }
 
   
