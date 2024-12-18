@@ -1,0 +1,48 @@
+.add-button {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.header {
+  display: flex; /* Make the container a flexbox */
+  justify-content: space-between; /* Push the elements to opposite ends */
+  align-items: center; /* Align items vertically in the center */
+  margin-bottom: 1rem; /* Add some spacing below the header */
+}
+.header{
+  margin: 0;
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+form div {
+  margin: 10px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}

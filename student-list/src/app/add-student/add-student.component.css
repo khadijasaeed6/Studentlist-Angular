@@ -1,0 +1,113 @@
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  tr {
+    cursor: pointer;
+  }
+  
+  tr:hover {
+    background-color: #353333;
+  }
+  .add {
+  cursor: pointer;
+  width: 45px;
+}
+  
+  .error {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  em {
+    color: #ff4d4d;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button.primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  button.primary:hover {
+    background-color: #0056b3;
+  }
+  
+  button.secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  button.secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  button.saving {
+    background-color: #28a745;
+    color: white;
+    cursor: not-allowed;
+  }
+  
+  button.saving:disabled {
+    opacity: 0.6;
+  }
+  
+  
