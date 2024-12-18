@@ -19,6 +19,7 @@ import { DetailsComponent } from '../details/details.component';
 
 export class StudentListComponent implements OnInit {
   students: Student[] = [];
+  selectedStudent?: Student;
 
   constructor(private studentService: StudentService) {
     
@@ -39,7 +40,12 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  
+  viewDetails(id: string): void {
+    this.selectedStudent = this.students.find(student => student.id === id);
+  }
 }
+
+  
+
 
 
