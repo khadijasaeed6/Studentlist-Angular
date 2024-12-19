@@ -1,11 +1,27 @@
 export interface Student {
-    id: string;
-    FirstName: string;
-    LasttName: string;
-    age: number;
-    grade: string;
-    email: string;
-    phone: number;
-    address: string,
-  }
-  
+  id: string;
+  firstName: string;
+  lasttName: string;
+  age?: number;
+  grade: Grade;
+  email: string;
+  phone: number;
+  address: string;
+  gender: Gender;
+  dob: Date
+}
+
+export enum Gender {
+  Male = 'Male',
+  Female = 'Female',
+  Other = 'Other'
+}
+
+export enum Grade {
+  A = 'A',
+  B = 'B',
+  C = 'C',
+  D = 'D',
+  F = 'F'
+}
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student/student.service';
-import { Student } from '../student/student.model';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Gender, Grade, Student } from '../student/student.model';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -17,10 +17,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddStudentComponent implements OnInit {
   student: Student = {
     id: '',
-    FirstName: '',
-    LasttName: '',
-    grade: '',
-    age: 0,
+    firstName: '',
+    lasttName: '',
+    gender: Gender.Female,
+    grade: Grade.A,
+    dob: new Date(),
+    // age: 0,
     email: '',
     phone: 0,
     address: ''

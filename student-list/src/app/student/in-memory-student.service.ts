@@ -1,14 +1,16 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Student } from './student.model'; 
+import { Gender, Grade, Student } from './student.model'; 
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const student: Student[] = [
       {
         id: '1',
-        FirstName: 'John',
-        LasttName: 'Doe',
-        grade: 'A',
+        firstName: 'John',
+        lasttName: 'Doe',
+        gender: Gender.Male,
+        grade: Grade.A,
+        dob: new Date('2003-05-15'),
         age: 16,
         email: 'john.doe@example.com',
         phone: 5551234567,
@@ -16,9 +18,11 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: '2',
-        FirstName: 'Jane',
-        LasttName: 'Smith',
-        grade: 'B',
+        firstName: 'Jane',
+        lasttName: 'Smith',
+        gender: Gender.Male,
+        grade: Grade.B,
+        dob: new Date('2003-05-15'),
         age: 15,
         email: 'jane.smith@example.com',
         phone: 5559876543,
@@ -26,9 +30,11 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: '3',
-        FirstName: 'Mark',
-        LasttName: 'Johnson',
-        grade: 'C',
+        firstName: 'Mark',
+        lasttName: 'Johnson',
+        gender: Gender.Female,
+        grade: Grade.D,
+        dob: new Date('2003-05-15'),
         age: 17,
         email: 'mark.johnson@example.com',
         phone: 5554567890,
