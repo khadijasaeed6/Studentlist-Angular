@@ -11,7 +11,7 @@
 
     <div>
       <label for="LasttName">Last Name: </label>
-      <input type="text" id="LasttName" name="lasttName" [(ngModel)]="student.lasttName" required minlength="3"
+      <input type="text" id="LasttName" name="lasttName" [(ngModel)]="student.lastName" required minlength="3"
         #lastName="ngModel">
       <em *ngIf="lastName.errors?.['required'] && lastName.touched">Last name is required </em>
     </div>

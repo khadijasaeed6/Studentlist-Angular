@@ -1,7 +1,7 @@
 export interface Student {
   id: string;
   firstName: string;
-  lasttName: string;
+  lastName: string;
   age?: number;
   grade: Grade;
   email: string;

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from '../student/student.model'; 
 import {StudentService} from '../student/student.service';
 import { RouterModule } from '@angular/router';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule, JsonPipe, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from '../details/details.component';
 
@@ -44,6 +44,7 @@ export class StudentListComponent implements OnInit {
     this.selectedStudent = student;
   }
 
+  
 }
 
   

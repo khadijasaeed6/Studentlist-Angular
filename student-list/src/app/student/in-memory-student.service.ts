@@ -7,7 +7,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: '1',
         firstName: 'John',
-        lasttName: 'Doe',
+        lastName: 'Doe',
         gender: Gender.Male,
         grade: Grade.A,
         dob: new Date('2003-05-15'),
@@ -19,8 +19,8 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: '2',
         firstName: 'Jane',
-        lasttName: 'Smith',
-        gender: Gender.Male,
+        lastName: 'Smith',
+        gender: Gender.Female,
         grade: Grade.B,
         dob: new Date('2003-05-15'),
         age: 15,
@@ -31,7 +31,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: '3',
         firstName: 'Mark',
-        lasttName: 'Johnson',
+        lastName: 'Johnson',
         gender: Gender.Female,
         grade: Grade.D,
         dob: new Date('2003-05-15'),

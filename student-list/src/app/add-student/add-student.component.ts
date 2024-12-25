@@ -18,7 +18,7 @@ export class AddStudentComponent implements OnInit {
   student: Student = {
     id: '',
     firstName: '',
-    lasttName: '',
+    lastName: '',
     gender: Gender.Female,
     grade: Grade.A,
     dob: new Date(),
