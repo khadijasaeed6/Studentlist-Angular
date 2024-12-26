@@ -4,6 +4,7 @@ import { Gender, Grade, Student } from '../student/student.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StudentServiceLocal } from '../student/localstorage.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 })
 export class AddStudentComponent implements OnInit {
+  gender = Gender;
   student: Student = {
     id: '',
     firstName: '',
@@ -29,31 +31,57 @@ export class AddStudentComponent implements OnInit {
   };
 
   constructor(private route: ActivatedRoute,
-    private studentService: StudentService,
-    private router: Router) {
+    // private studentService: StudentService,
+    private studentService: StudentServiceLocal,
+    private router: Router,) {
 
   }
 
   ngOnInit() {
     const studentId = this.route.snapshot.params['id'];
     if (!studentId) return
-    this.studentService.getStudent(studentId).subscribe((student) => {
-      if (student)
-        this.student = student;
-    });
-  };
+    // this.studentService.add(studentId).subscribe((student) => {
+    //   if (student)
+    //     this.student = student;
+    // });
+    if (studentId) {
+      // Fetch the student details if `id` is present
+      const students = this.studentService.getAllStudents();
+      const student = students.find((s:Student) => s.id === studentId);
 
-  saveStudent() {
+      if (student) {
+        this.student = student;
+      }
+    }
+      
+    }
+  
+
+  // saveStudent() {
    
-    this.studentService.saveStudent(this.student).subscribe({
-      next: () => this.router.navigate(['/student'])
-    })
+  //   this.studentService.saveStudent(this.student).subscribe({
+  //     next: () => this.router.navigate(['/student'])
+  //   })
+
+  saveStudent(): void {
+    if (this.student.id) {
+      // If an ID exists, it's an update
+      this.studentService.updateStudent(this.student.id, this.student);
+      this.router.navigate(['/student']);
+    } else {
+      // If no ID exists, it's a new student
+      this.student.id = new Date().getTime().toString(); // Generate a unique ID
+      this.studentService.addStudent(this.student);
+      alert('Student saved successfully!');
+      this.router.navigate(['/student']);
+
+    }
+  }
 
 
   }
 
 
-}
 
 
 

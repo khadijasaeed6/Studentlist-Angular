@@ -11,17 +11,36 @@
 
     <div>
       <label for="LasttName">Last Name: </label>
-      <input type="text" id="LasttName" name="lasttName" [(ngModel)]="student.lastName" required minlength="3"
+      <input type="text" id="LastName" name="lastName" [(ngModel)]="student.lastName" required minlength="3"
         #lastName="ngModel">
       <em *ngIf="lastName.errors?.['required'] && lastName.touched">Last name is required </em>
     </div>
 
+    <div>
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" [(ngModel)]="student.gender" required>
+        <option [value]="gender.Male">Male</option>
+        <option [value]="gender.Female">Female</option>
+      </select>
+      <div *ngIf="!student.gender && studentForm.touched" class="error">
+        Gender is required.
+      </div>
+    </div>
+    
+
 
     <div>
       <label for="grade">Grade:</label>
-      <input type="text" id="grade" name="grade" [(ngModel)]="student.grade" required #grade="ngModel">
-      <div *ngIf="grade.invalid && grade.touched" class="error">
-        Grade is required.
+      <input type="text" id="grade" name="grade" [(ngModel)]="student.grade" required #grade="ngModel"
+        placeholder="E.g., A, B, C">
+      <div *ngIf="grade.invalid && grade.touched" class="error">Grade is required.</div>
+    </div>
+
+    <div>
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" [(ngModel)]="student.dob" required #dob="ngModel">
+      <div *ngIf="dob.invalid && dob.touched" class="error">
+        Date of Birth is required.
       </div>
     </div>
 
@@ -40,9 +59,11 @@
       <div *ngIf="email.errors?.['email'] && email.touched" class="error">Please enter a valid email address.</div>
     </div>
 
+   
     <div>
       <label for="phone">Phone:</label>
-      <input type="tel" id="phone" name="phone" [(ngModel)]="student.phone" required pattern="^[0-9]{10}$" #phone="ngModel">
+      <input type="tel" id="phone" name="phone" [(ngModel)]="student.phone" required pattern="^[0-9]{10}$"
+        #phone="ngModel">
       <div *ngIf="phone.errors?.['required'] && phone.touched" class="error">Phone number is required.</div>
       <div *ngIf="phone.errors?.['pattern'] && phone.touched" class="error">Phone number must be 10 digits.</div>
     </div>

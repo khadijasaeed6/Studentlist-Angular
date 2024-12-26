@@ -1,17 +1,17 @@
-import { Gender, Grade, Student } from './student.model'; 
+import { Gender, Grade, Student } from './student.model';
 
 export class Init {
   load() {
     const studentsInStorage = localStorage.getItem('students');
     if (studentsInStorage === null || studentsInStorage === undefined) {
       console.log('No students found... Creating...');
-      
+
       const students: Student[] = [
         {
           id: '1',
           firstName: 'John',
           lastName: 'Doe',
-          gender: Gender.Male,  
+          gender: Gender.Male,
           grade: Grade.A,
           dob: new Date('2003-05-15'),
           age: 16,
@@ -23,7 +23,7 @@ export class Init {
           id: '2',
           firstName: 'Jane',
           lastName: 'Smith',
-          gender: Gender.Female,  
+          gender: Gender.Female,
           grade: Grade.B,
           dob: new Date('2002-05-25'),
           age: 15,
@@ -35,7 +35,7 @@ export class Init {
           id: '3',
           firstName: 'Mark',
           lastName: 'Johnson',
-          gender: Gender.Male, 
+          gender: Gender.Male,
           grade: Grade.D,
           dob: new Date('2001-04-12'),
           age: 17,
@@ -47,10 +47,8 @@ export class Init {
 
       // Save the students to localStorage
       localStorage.setItem('students', JSON.stringify(students));
-      return students;  
+      return students;
     }
-
-    // If students are already in localStorage, return them
-    return JSON.parse(studentsInStorage);  
+    return JSON.parse(studentsInStorage);
   }
 }

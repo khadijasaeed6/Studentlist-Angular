@@ -5,7 +5,7 @@ import { Student } from './student.model';
 @Injectable({
     providedIn: 'root',
 })
-export class StudentService extends Init {
+export class StudentServiceLocal extends Init {
 
     constructor() {
         super();
@@ -24,15 +24,6 @@ export class StudentService extends Init {
         }
     }
 
-    // addStudent(newStudent: Student) {
-    //     let students;
-    //     const studentListFromlocal = localStorage.getItem('students');
-    //     if (studentListFromlocal?.length) {
-    //         students = JSON.parse(studentListFromlocal) ;
-    //     }
-    //     students.push(newStudent);
-    //     localStorage.setItem('students', JSON.stringify(students));
-    // }
 
     addStudent(newStudent: Student) {
         let students: Student[] = [];
@@ -45,24 +36,31 @@ export class StudentService extends Init {
         students.push(newStudent);
         localStorage.setItem('students', JSON.stringify(students));
     }
-    
+
+    updateStudent(id: string, updatedStudent: Student): void {
+        const studentListFromLocal = localStorage.getItem('students');
+        if (studentListFromLocal) {
+          let students = JSON.parse(studentListFromLocal);
+          const index = students.findIndex((s: Student) => s.id === id);
+      
+          if (index) {
+            students[index] = updatedStudent;
+            localStorage.setItem('students', JSON.stringify(students));
+          }
+        }
+      }
+       
 
     deleteStudent(id: string): void {
         const studentListFromLocal = localStorage.getItem('students');
     
         if (studentListFromLocal) {
-            // Parse the string into an array
             const students: Student[] = JSON.parse(studentListFromLocal);
-    
-            // Filter out the student with the given ID
             const updatedStudents = students.filter(student => student.id !== id);
-    
-            // Save the updated array back to local storage
             localStorage.setItem('students', JSON.stringify(updatedStudents));
         }
     }
     
-
     }
 
 
