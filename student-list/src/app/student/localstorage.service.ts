@@ -60,7 +60,6 @@ export class StudentServiceLocal extends Init {
             localStorage.setItem('students', JSON.stringify(updatedStudents));
         }
     }
-    
     }
 
 
