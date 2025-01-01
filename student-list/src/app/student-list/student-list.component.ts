@@ -21,13 +21,11 @@ import { StudentServiceLocal } from '../student/localstorage.service';
 export class StudentListComponent implements OnInit {
   students: Student[] = [];
   selectedStudent?: Student;
+  studentId: string = ''; // To hold the emitted student ID
 
-  // constructor(private studentService: StudentService) {
-    
-  // }
-  constructor(private studentService: StudentServiceLocal) {
-    
-  }
+  // constructor(private studentService: StudentService) {// }
+
+  constructor(private studentService: StudentServiceLocal) { }
 
   ngOnInit(): void {
     // this.studentService.getAllStudents().subscribe((students) => {
@@ -57,6 +55,11 @@ export class StudentListComponent implements OnInit {
 
   viewDetails(student: Student) {
     this.selectedStudent = student;
+  }
+
+  OnDataChanged(studentId: string): void {
+    this.studentId = studentId;
+    console.log('Saved Student ID:', this.studentId);
   }
 
   
