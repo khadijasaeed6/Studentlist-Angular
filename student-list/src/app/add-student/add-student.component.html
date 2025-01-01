@@ -26,8 +26,6 @@
         Gender is required.
       </div>
     </div>
-    
-
 
     <div>
       <label for="grade">Grade:</label>
@@ -38,19 +36,16 @@
 
     <div>
       <label for="dob">Date of Birth:</label>
-      <input type="date" id="dob" name="dob" [(ngModel)]="student.dob" required #dob="ngModel">
-      <div *ngIf="dob.invalid && dob.touched" class="error">
-        Date of Birth is required.
-      </div>
+      <input type="date" id="dob" name="dob" [(ngModel)]="student.dob"
+        (change)="student.age = calculateAge(student.dob)" required />
     </div>
-
-    <!-- <div>
+    <div>
       <label for="age">Age:</label>
-      <input type="number" id="age" name="age" [(ngModel)]="student.age" required min="5" max="100" #age="ngModel">
-      <div *ngIf="age.errors?.['required'] && age.touched" class="error">Age is required.</div>
-      <div *ngIf="age.errors?.['min'] && age.touched" class="error">Age must be at least 5 years old.</div>
-      <div *ngIf="age.errors?.['max'] && age.touched" class="error">Age cannot exceed 100 years.</div>
-    </div> -->
+      <input type="number" id="age" name="age" [(ngModel)]="student.age" readonly />
+      <div *ngIf="student.age < 10" class="error">Age must be at least 10 years old.</div>
+      <div *ngIf="student.age > 100" class="error">Age cannot exceed 100 years.</div>
+
+    </div>
 
     <div>
       <label for="email">Email:</label>
@@ -59,7 +54,7 @@
       <div *ngIf="email.errors?.['email'] && email.touched" class="error">Please enter a valid email address.</div>
     </div>
 
-   
+
     <div>
       <label for="phone">Phone:</label>
       <input type="tel" id="phone" name="phone" [(ngModel)]="student.phone" required pattern="^[0-9]{10}$"

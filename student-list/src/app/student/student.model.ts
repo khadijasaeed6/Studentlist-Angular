@@ -2,7 +2,7 @@ export interface Student {
   id: string;
   firstName: string;
   lastName: string;
-  age?: number;
+  age: number;
   grade: Grade;
   email: string;
   phone: number;
