@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentServiceLocal } from '../student/localstorage.service';
 import moment from 'moment';
+import {
+	NgbCalendar,NgbDateAdapter,NgbDateParserFormatter,NgbDatepickerModule,NgbDateStruct,
+} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({

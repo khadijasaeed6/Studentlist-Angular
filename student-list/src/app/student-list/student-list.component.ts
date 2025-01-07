@@ -1,22 +1,19 @@
-import { Component, OnInit,inject, Type  } from '@angular/core';
+import { Component, OnInit,PipeTransform  } from '@angular/core';
 import { Student } from '../student/student.model'; 
 import {StudentService} from '../student/student.service';
 import { RouterModule } from '@angular/router';
-import { CommonModule, JsonPipe, NgFor } from '@angular/common';
+import { CommonModule, JsonPipe, NgFor, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from '../details/details.component';
 import { StudentServiceLocal } from '../student/localstorage.service';
-import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import {NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-
-
 
 
 @Component({
   standalone: true,
   selector: 'app-student-list',
   imports: [CommonModule, NgFor, FormsModule, RouterModule, DetailsComponent ],
+  providers: [DecimalPipe],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })
@@ -27,11 +24,14 @@ export class StudentListComponent implements OnInit {
   selectedStudent?: Student;
   studentId: string = ''; // To hold the emitted student ID
   studentToDelete?: Student;
+  filteredStudents: Student[] = [];
+  searchText: string = '';
 
   // constructor(private studentService: StudentService) {// }
 
   constructor(private studentService: StudentServiceLocal,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private pipe: DecimalPipe
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +40,7 @@ export class StudentListComponent implements OnInit {
     // });
 
     this.students=this.studentService.getAllStudents();
+    this.filteredStudents = this.students; 
 
   }
 
@@ -70,20 +71,6 @@ export class StudentListComponent implements OnInit {
   }
 
 
-  // openDeleteModal(student: Student): void {
-  //   const modalRef = this.modalService.open(DeleteModalComponent);
-  //   modalRef.componentInstance.student = student; // Pass student to modal
-
-  //   // Listen for confirmDelete event
-  //   modalRef.componentInstance.confirmDelete.subscribe(() => {
-  //     this.confirmDelete(student.id);
-  //   });
-  // }
-
-  // confirmDelete(studentId: string): void {
-  //   this.studentService.deleteStudent(studentId);
-  //   this.students = this.studentService.getAllStudents(); // Refresh the list
-  // }
 
   openDeleteModal(content: any, student: Student): void {
     this.studentToDelete = student; // Set the student to delete
@@ -98,8 +85,28 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  
+  searchStudents(text: string, pipe: PipeTransform, students: Student[]): Student[] {
+    return students.filter((student) => {
+      const term = text.toLowerCase();
+      return (
+        student.firstName.toLowerCase().includes(term) ||
+        student.lastName.toLowerCase().includes(term) ||
+        student.grade.toLowerCase().includes(term) ||
+        pipe.transform(student.age).includes(term) ||
+        student.email.toLowerCase().includes(term) ||
+        student.phone.toString().includes(term)
+      );
+    });
+
+  }
+
+  onSearch() {
+    this.filteredStudents = this.searchStudents(this.searchText, this.pipe, this.students);
+  }
 }
+
+  
+
 
 
   
