@@ -6,7 +6,7 @@
     </button>
   </div>
   <div>
-      <!-- Display the saved student ID -->
+    <!-- Display the saved student ID -->
    <p *ngIf="studentId">Saved Student ID: {{ studentId }}</p>
   </div>
     <table>
@@ -39,7 +39,9 @@
           <td>{{ student.phone }}</td>
           <td>{{ student.address }}</td>
           <td>
-            <button (click)="deleteStudent(student.id)">Delete</button>
+            <!-- <button (click)="deleteStudent(student.id)">Delete</button> -->
+            <!-- <button class="btn btn-danger" (click)="openDeleteModal(student)">Delete</button> -->
+            <button class="btn btn-danger" (click)="openDeleteModal(deleteModal, student)">Delete</button>
           </td>
           <td>
             <button [routerLink]="['/student/add', student.id]">Edit</button>
@@ -53,9 +55,37 @@
   </div>
    <!-- Child component to show student details -->
    <app-details [student]="selectedStudent" (onDataChanged)="OnDataChanged($event)"></app-details>
-   <!-- <app-details [student]="selectedStudent" (onDataChanged)="OnDataChanged($event)"></app-details> -->
+   
+  <!-- Delete Confirmation Modal -->
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Profile Deletion</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      <strong>Are you sure you want to delete <span class="text-primary">"{{ studentToDelete?.firstName }} {{ studentToDelete?.lastName }}"</span> profile?</strong>
+    </p>
+    <p>
+      All information associated with this user profile will be permanently deleted.
+      <span class="text-danger">This operation cannot be undone.</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="confirmDelete(); modal.close('Ok click')">Ok</button>
+  </div>
+</ng-template>
 
+<button type="button" class="btn btn-primary" >Reset</button>
  
+
+
 
   
 
