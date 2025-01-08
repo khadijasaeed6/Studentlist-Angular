@@ -2,15 +2,18 @@
   <h2>Add New Student</h2>
   <form #studentForm="ngForm" (ngSubmit)="saveStudent()">
     <div>
+   
       <input type="hidden" [ngModel]="student.id" name="id">
       <label for="FirstName">First Name: </label>
       <input [(ngModel)]="student.firstName" required minlength="3" #firstName="ngModel" name="firstName" />
       <em *ngIf="firstName.errors?.['required'] && firstName.touched">Please enter a first name </em>
       <em *ngIf="firstName.errors?.['minlength'] ">First name must be at least 3 characters </em>
+    
     </div>
 
     <div>
       <label for="LasttName">Last Name: </label>
+    
       <input type="text" id="LastName" name="lastName" [(ngModel)]="student.lastName" required minlength="3"
         #lastName="ngModel">
       <em *ngIf="lastName.errors?.['required'] && lastName.touched">Last name is required </em>
@@ -18,6 +21,7 @@
 
     <div>
       <label for="gender">Gender:</label>
+      
       <select id="gender" name="gender" [(ngModel)]="student.gender" required>
         <option [value]="gender.Male">Male</option>
         <option [value]="gender.Female">Female</option>
@@ -25,50 +29,76 @@
       <div *ngIf="!student.gender && studentForm.touched" class="error">
         Gender is required.
       </div>
+    
     </div>
 
     <div>
       <label for="grade">Grade:</label>
+     
       <input type="text" id="grade" name="grade" [(ngModel)]="student.grade" required #grade="ngModel"
         placeholder="E.g., A, B, C">
       <div *ngIf="grade.invalid && grade.touched" class="error">Grade is required.</div>
+      
     </div>
 
-    <div>
+    <!-- <div>
       <label for="dob">Date of Birth:</label>
       <input type="date" id="dob" name="dob" [(ngModel)]="student.dob"
         (change)="student.age = calculateAge(student.dob)" required />
+    </div> -->
+
+    <div>
+      <label for="dob">Date of Birth:</label>
+      <ngb-datepicker
+        [(ngModel)]="model"
+        (ngModelChange)="onDobChange(model)"
+        [minDate]="{ year: 1900, month: 1, day: 1 }"
+        [maxDate]="{ year: 2023, month: 12, day: 31 }"
+        name="dob"
+        #dob="ngModel"
+        required
+      ></ngb-datepicker>
     </div>
+    
+
     <div>
       <label for="age">Age:</label>
+      
       <input type="number" id="age" name="age" [(ngModel)]="student.age" readonly />
       <div *ngIf="student.age < 10" class="error">Age must be at least 10 years old.</div>
       <div *ngIf="student.age > 100" class="error">Age cannot exceed 100 years.</div>
+      
 
     </div>
 
     <div>
       <label for="email">Email:</label>
+    
       <input type="email" id="email" name="email" [(ngModel)]="student.email" required email #email="ngModel">
       <div *ngIf="email.errors?.['required'] && email.touched" class="error">Email is required.</div>
       <div *ngIf="email.errors?.['email'] && email.touched" class="error">Please enter a valid email address.</div>
+      
     </div>
 
 
     <div>
       <label for="phone">Phone:</label>
+     
       <input type="tel" id="phone" name="phone" [(ngModel)]="student.phone" required pattern="^[0-9]{10}$"
         #phone="ngModel">
       <div *ngIf="phone.errors?.['required'] && phone.touched" class="error">Phone number is required.</div>
       <div *ngIf="phone.errors?.['pattern'] && phone.touched" class="error">Phone number must be 10 digits.</div>
+      
     </div>
 
     <div>
       <label for="address">Address:</label>
-      <input type="text" id="address" name="address" [(ngModel)]="student.address" required #address="ngModel">
-      <div *ngIf="address.invalid && address.touched" class="error">
-        Address is required.
-      </div>
+      
+        <input type="text" id="address" name="address" [(ngModel)]="student.address" required #address="ngModel">
+        <div *ngIf="address.invalid && address.touched" class="error">
+          Address is required.
+        </div>
+      
     </div>
     <div class="buttons">
       <button class="primary" type="submit" [disabled]="studentForm.invalid"> Save </button>

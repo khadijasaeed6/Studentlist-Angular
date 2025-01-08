@@ -1,14 +1,14 @@
-export interface Student {
-  id: string;
-  firstName: string;
-  lastName: string;
-  age: number;
-  grade: Grade;
-  email: string;
-  phone: number;
-  address: string;
-  gender: Gender;
-  dob: Date
+export class Student {
+  id!: string;
+  firstName!: string;
+  lastName!: string;
+  age!: number;
+  grade!: Grade;
+  email!: string;
+  phone!: number;
+  address!: string;
+  gender!: Gender;
+  dob!: Date
 }
 
 export enum Gender {

@@ -37,18 +37,35 @@ export class StudentServiceLocal extends Init {
         localStorage.setItem('students', JSON.stringify(students));
     }
 
+    // updateStudent(id: string, updatedStudent: Student): void {
+    //     const studentListFromLocal = localStorage.getItem('students');
+    //     if (studentListFromLocal) {
+    //       let students = JSON.parse(studentListFromLocal);
+    //       const index = students.findIndex((s: Student) => s.id === id);
+      
+    //       if (index) {
+    //         students[index] = updatedStudent;
+    //         localStorage.setItem('students', JSON.stringify(students));
+    //       }
+    //     }
+    //   }
+
     updateStudent(id: string, updatedStudent: Student): void {
         const studentListFromLocal = localStorage.getItem('students');
         if (studentListFromLocal) {
           let students = JSON.parse(studentListFromLocal);
           const index = students.findIndex((s: Student) => s.id === id);
       
-          if (index) {
+          if (index !== -1) {  // Fix the condition to check if index is valid
             students[index] = updatedStudent;
             localStorage.setItem('students', JSON.stringify(students));
           }
         }
       }
+      
+
+
+
        
 
     deleteStudent(id: string): void {

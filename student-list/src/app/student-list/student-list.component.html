@@ -1,16 +1,17 @@
 <div class="student-list">
   <div class="header">
     <h2>Student List</h2>
-    <button routerLink="/student/add">
+    <!-- <button routerLink="/student/add">
       Add New Student
-    </button>
+    </button> -->
+    <button (click)="openAddStudentModal(addStudentModal)">Add New Student</button>
   </div>
 
   <div>
     <!-- Search bar -->
     <input type="text" placeholder="Search students..." [(ngModel)]="searchText" (input)="onSearch()" />
   </div>
-
+  <br>
   <div>
     <!-- Display the saved student ID -->
     <p *ngIf="studentId">Saved Student ID: {{ studentId }}</p>
@@ -74,10 +75,13 @@
               <td>{{ student.phone }}</td>
               <td>{{ student.address }}</td>
               <td>
-                  <button class="btn btn-danger" (click)="openDeleteModal(deleteModal, student)">Delete</button>
+                  <!-- <button class="btn btn-danger" (click)="openDeleteModal(deleteModal, student)">Delete</button> -->
+                  <button (click)="openDeleteModal(deleteModal, student)">Delete</button>
               </td>
               <td>
-                <button [routerLink]="['/student/add', student.id]">Edit</button>
+                <!-- <button [routerLink]="['/student/add', student.id]">Edit</button> -->
+                 <button (click)="openEditStudentModal(addStudentModal, student)" >Edit</button>
+                 
               </td>
           </tr>
       </ng-container>
@@ -88,6 +92,26 @@
 </div>
 <!-- Child component to show student details -->
 <app-details [student]="selectedStudent" (onDataChanged)="OnDataChanged($event)"></app-details>
+
+<ng-template #addStudentModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Add Student</h4>
+    <button type="button" class="btn-close" aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <app-add-student
+    [studentTemp]="studentToEdit"
+    (resetStudentModal)="resetStudentModal()"
+    (formSubmit)="closeModal(modal)">
+  </app-add-student>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="confirmDelete(); modal.close('Ok click')">Ok</button>
+  </div> -->
+</ng-template>
+
 
 <!-- Delete Confirmation Modal -->
 <ng-template #deleteModal let-modal>

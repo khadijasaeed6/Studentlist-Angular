@@ -1,4 +1,4 @@
-import { Component, OnInit,PipeTransform  } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit,PipeTransform } from '@angular/core';
 import { Student } from '../student/student.model'; 
 import {StudentService} from '../student/student.service';
 import { RouterModule } from '@angular/router';
@@ -7,12 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from '../details/details.component';
 import { StudentServiceLocal } from '../student/localstorage.service';
 import {NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddStudentComponent } from '../add-student/add-student.component';
 
 
 @Component({
   standalone: true,
   selector: 'app-student-list',
-  imports: [CommonModule, NgFor, FormsModule, RouterModule, DetailsComponent ],
+  imports: [CommonModule, NgFor, FormsModule, RouterModule, DetailsComponent, AddStudentComponent ],
   providers: [DecimalPipe],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
@@ -26,12 +27,16 @@ export class StudentListComponent implements OnInit {
   studentToDelete?: Student;
   filteredStudents: Student[] = [];
   searchText: string = '';
+  studentToEdit?: Student;
+  
+  
 
   // constructor(private studentService: StudentService) {// }
 
   constructor(private studentService: StudentServiceLocal,
     private modalService: NgbModal,
-    private pipe: DecimalPipe
+    private pipe: DecimalPipe,
+    private ctx: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -59,6 +64,23 @@ export class StudentListComponent implements OnInit {
   //     this.students = this.studentService.getAllStudents();
   //   }
   // }
+
+  openAddStudentModal(content: any): void {
+    this.studentToEdit = undefined; // Ensure the form is for a new student
+    this.modalService.open(content, { centered: true });
+  }
+  
+
+  openEditStudentModal(content: any, student: Student): void {
+    this.studentToEdit = student;  // Set the student to edit
+    this.modalService.open(content, { centered: true });
+  }
+
+  closeModal(modal: any): void {
+    modal.dismiss();  // Close the modal after form submission
+    
+  }
+  
   
 
   viewDetails(student: Student) {
@@ -83,6 +105,7 @@ export class StudentListComponent implements OnInit {
       this.students = this.studentService.getAllStudents(); // Refresh the list
       this.studentToDelete = undefined; // Reset the studentToDelete
     }
+    
   }
 
   searchStudents(text: string, pipe: PipeTransform, students: Student[]): Student[] {
@@ -102,6 +125,13 @@ export class StudentListComponent implements OnInit {
 
   onSearch() {
     this.filteredStudents = this.searchStudents(this.searchText, this.pipe, this.students);
+  }
+
+  resetStudentModal(){
+    debugger
+    this.modalService.dismissAll();
+    this.filteredStudents = this.studentService.getAllStudents();
+    
   }
 }
 
