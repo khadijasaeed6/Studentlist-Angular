@@ -81,7 +81,10 @@
               <td>
                 <!-- <button [routerLink]="['/student/add', student.id]">Edit</button> -->
                  <button (click)="openEditStudentModal(addStudentModal, student)" >Edit</button>
-                 
+
+              </td>
+              <td>
+                <button (click)="addAttendance(student)">Attendance</button>
               </td>
           </tr>
       </ng-container>
@@ -92,6 +95,7 @@
 </div>
 <!-- Child component to show student details -->
 <app-details [student]="selectedStudent" (onDataChanged)="OnDataChanged($event)"></app-details>
+<app-student-attendance></app-student-attendance>
 
 <ng-template #addStudentModal let-modal>
   <div class="modal-header">

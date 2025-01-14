@@ -8,12 +8,13 @@ import { DetailsComponent } from '../details/details.component';
 import { StudentServiceLocal } from '../student/localstorage.service';
 import {NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddStudentComponent } from '../add-student/add-student.component';
+import { StudentAttendanceComponent } from '../student-attendance/student-attendance.component';
 
 
 @Component({
   standalone: true,
   selector: 'app-student-list',
-  imports: [CommonModule, NgFor, FormsModule, RouterModule, DetailsComponent, AddStudentComponent ],
+  imports: [CommonModule, NgFor, FormsModule, RouterModule, DetailsComponent, AddStudentComponent,StudentAttendanceComponent ],
   providers: [DecimalPipe],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
@@ -102,7 +103,7 @@ export class StudentListComponent implements OnInit {
   confirmDelete(): void {
     if (this.studentToDelete) {
       this.studentService.deleteStudent(this.studentToDelete.id);
-      this.students = this.studentService.getAllStudents(); // Refresh the list
+      this.filteredStudents = this.studentService.getAllStudents(); // Refresh the list
       this.studentToDelete = undefined; // Reset the studentToDelete
     }
     
@@ -132,6 +133,10 @@ export class StudentListComponent implements OnInit {
     this.modalService.dismissAll();
     this.filteredStudents = this.studentService.getAllStudents();
     
+  }
+
+  addAttendance(student:Student){
+    this.studentService.studentForAttendance.next(student)
   }
 }
 

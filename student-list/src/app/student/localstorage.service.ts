@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Init } from './student-init';
 import { Student } from './student.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class StudentServiceLocal extends Init {
+
+    studentForAttendance= new Subject<Student>()
+    
 
     constructor() {
         super();
